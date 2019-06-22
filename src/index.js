@@ -6,15 +6,21 @@ import * as serviceWorker from './serviceWorker';
 import 'tachyons';
 import App from './containers/App.js';
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux'; 
-import {searchRobots} from './reducers';
+import {createStore, applyMiddleware, combineReducers} from 'redux'; // 
+import {searchRobots, requestRobots} from './reducers'; // for Store
 import {createLogger } from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
 
 const logger = createLogger();
-const store = createStore(searchRobots, applyMiddleware(logger));
+
+const rootReducer = combineReducers({searchRobots, requestRobots})
+
+// searchRobots is rootReducer
+// applyMiddleware tells what's going in the app when actions happen
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware,logger));
 
 ReactDOM.render(
-    // provide all states from Redux to Connect components to be aware of Redux existence
+    // provide Store (all states that is source of all true) from Redux to Connect components to be aware of Redux existence
     <Provider store={store}> 
          <App />
     </Provider>,
