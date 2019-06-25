@@ -1,6 +1,7 @@
 import React from 'react';
 
 const SearchBox=({searchField, searchChange})=>{
+    console.log("CardList");
     return(
         <div className="pa2">
             <input 

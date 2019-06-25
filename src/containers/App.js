@@ -7,7 +7,7 @@ import ErrorBoundary from '../components/ErrorBoundary.js';
 
 import {setSearchField, requestRobots} from '../actions';
 import {connect} from 'react-redux'; 
-
+import Header from '../components/Header';
 
 // what state I need to listen to and send it out to prop (this case searchField)
 const mapStateToProps = (state) => {
@@ -65,7 +65,7 @@ class App extends Component {
         else{
             return(
             <div className='tc'>
-                <h1 className='f1'>RoboFriends</h1>
+                <Header/>
                 <SearchBox searchChange={onSearchChange} />
                 <Scroll>
                     {/* if CardList(children) goes fails, ErrorBoundary will catch it and have graceful exit boundary  */}

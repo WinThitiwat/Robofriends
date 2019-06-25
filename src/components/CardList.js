@@ -18,8 +18,8 @@ const CardList = ({robots}) => {
     //     throw new Error("NNOOOOO");
     // }
 
+    console.log("CardList");
     return (
-        
         <div>
             {/* {cardComponent}; */}
             
