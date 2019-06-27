@@ -1,5 +1,4 @@
 import React from 'react'
-
 const Card = ({name, email, id} ) => { //const Card = (props) => {
     //const {name, email, id} = props;
     return (

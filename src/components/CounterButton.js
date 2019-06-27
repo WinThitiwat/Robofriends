@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 class CounterButton extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state={
       count: 0
     }
@@ -22,9 +22,11 @@ class CounterButton extends Component {
   }
 
   render(){
-    console.log('CounterButton')
     return (
-      <button color={this.props.color} onClick={this.updateCount}>
+      <button 
+        id='counter'
+        color={this.props.color} 
+        onClick={this.updateCount}>
         Count: {this.state.count}
       </button>
       );
