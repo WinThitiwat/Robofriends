@@ -1,13 +1,9 @@
 import React, {Component} from 'react';
-import CardList from '../components/CardList';
-import SearchBox from '../components/SearchBox';
-import './App.css';
-import Scroll from '../components/Scroll.js';
-import ErrorBoundary from '../components/ErrorBoundary.js';
-
 import {setSearchField, requestRobots} from '../actions';
 import {connect} from 'react-redux'; 
-import Header from '../components/Header';
+
+import './App.css';
+import MainPage from '../components/MainPage';
 
 // what state I need to listen to and send it out to prop (this case searchField)
 const mapStateToProps = (state) => {
@@ -39,14 +35,14 @@ class App extends Component {
     //     }
     // }
 
-    componentDidMount(){
-        // this is called by requestRobots action
-        // fetch("https://jsonplaceholder.typicode.com/users")
-        //     .then(response=>response.json())
-        //     .then(users =>this.setState({robots: users}));
+    // componentDidMount(){
+    //     // this is called by requestRobots action
+    //     // fetch("https://jsonplaceholder.typicode.com/users")
+    //     //     .then(response=>response.json())
+    //     //     .then(users =>this.setState({robots: users}));
 
-        this.props.onRequestRobots()
-    }
+    //     this.props.onRequestRobots()
+    // }
 
 
     // this's coming down as props, so we  don't need it
@@ -55,30 +51,10 @@ class App extends Component {
     // }
     
     render(){
-        const {searchField, onSearchChange, robots, isPending} = this.props
-        const filteredRobot = robots.filter(robot=>{
-            return robot.name.toLowerCase().includes(searchField.toLowerCase());
-        }) 
-        if( isPending ){
-            return <h1>Loading</h1>
-        }
-        else{
-            return(
-            <div className='tc'>
-                <Header/>
-                <SearchBox searchChange={onSearchChange} />
-                <Scroll>
-                    {/* if CardList(children) goes fails, ErrorBoundary will catch it and have graceful exit boundary  */}
-                    <ErrorBoundary> 
-                        <CardList robots={filteredRobot}/>
-                    </ErrorBoundary>
-                </Scroll>
-            </div>
-        );
+        return <MainPage {...this.props}/>
     }
 } 
     
-}
 // in connect, listen to this part of the state  (mapState), and i'm interested in this action (mapDispatch)
 // and then get those props to the App
 export default connect(mapStateToProps, mapDispatchToProps)(App);
