@@ -5,7 +5,6 @@ jobs:
       - image: circleci/node:4.8.2
     steps:
       - checkout
-      - run: echo "npm installing"
       - run: npm install # check all packages if everything can be installed
       - run: CI=true npm run build
 
@@ -14,7 +13,6 @@ jobs:
       - image: circleci/node:4.8.2
     steps:
       - checkout
-      - run: echo "testing stuff"
       - run: npm install
       - run: npm test
 
@@ -27,8 +25,10 @@ jobs:
 
 workflows:
   version: 2
-  build_test_and_lint:
+  build-test-and-lint:
     jobs:
       - build
       - hithere
-      - test
+      - test:
+          requires:
+            - hithere
