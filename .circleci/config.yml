@@ -5,18 +5,32 @@ jobs:
       - image: circleci/node:4.8.2 
     steps:
       - checkout 
-      - run: echo "hello world" 
+      - run: echo "npm installing" 
+      - run: npm install # check all packages if everything can be installed
+      - run: CI=true npm run build
 
-  build2:
+  test:
     docker:
       - image: circleci/node:4.8.2 
     steps:
       - checkout 
-      - run: echo "Double trouble" 
+      - run: echo "testing stuff" 
+      - run: npm install
+      - run: npm test 
+
+  hithere:
+    docker:
+      - image: circleci/node:4.8.2 
+    steps:
+      - checkout
+      - run: echo "hellooo!"
 
 workflows:
   version: 2
-  build1_2:
+  build_test_and_lint:
     jobs:
-      - build1
-      - build2
+      - build
+      - hithere
+      - test:
+          requires:
+            - hithere
